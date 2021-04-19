@@ -19,7 +19,9 @@ void Musique::updateMusique()
 	for (Note &note : this->notes_) {
 		note.UpdatePosition();
 		if(note.getShape().getPosition().x > 0)this->renderWindow_->draw(note.getShape());
+		//TODO: Suppression objet
 	}
+
 }
 
 
