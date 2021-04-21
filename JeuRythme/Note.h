@@ -10,7 +10,7 @@ private:
 	TypeNote typeNote_;
 	sf::CircleShape shape_;
 public:
-	Note(float x = 0, float y =250);
+	Note(TypeNoteEnum typeNote, float x = 0, float y =250);
 	void UpdatePosition();
 	inline sf::CircleShape getShape() { return this->shape_; }
 };

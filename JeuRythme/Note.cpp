@@ -1,10 +1,11 @@
 #include "Note.h"
 
-Note::Note(float x , float y )
+Note::Note(TypeNoteEnum typeNote, float x , float y )
 {
+	this->typeNote_ = TypeNote(typeNote);
 	this->shape_.setPosition(x, y);
 	this->shape_.setRadius(10);
-	this->shape_.setFillColor(sf::Color::Green);
+	this->shape_.setFillColor(this->typeNote_.getCouleur());
 }
 
 void Note::UpdatePosition()

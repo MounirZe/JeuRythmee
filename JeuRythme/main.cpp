@@ -4,7 +4,6 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
-    Note manote;
 
     sf::CircleShape shape_(100);
     shape_.setFillColor(sf::Color::Green);
@@ -19,14 +18,17 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            
+            if (event.type == sf::Event::KeyPressed) {
+                mamusique.evenementTouche(event);
+            }
+
         }
 
         window.clear();
-        manote.UpdatePosition();
 
         mamusique.updateMusique();
 
-        window.draw(manote.getShape());
         window.display();
 
     }
