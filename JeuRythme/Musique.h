@@ -14,12 +14,16 @@ private:
 	string nom_;
 	sf::RenderWindow *renderWindow_;
 	sf::CircleShape reticule_;
+	int score_;
 
 public:
 	Musique(sf::RenderWindow &renderWindow);
 	 void genererMusique();
 	 void updateMusique();
 	 void evenementTouche(sf::Event& event);
+
+	 Note* getClosestNotePtr();
+	 inline int getScore() const { return this->score_; }
 };
 
 #endif
