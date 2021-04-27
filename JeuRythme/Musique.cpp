@@ -57,10 +57,10 @@ Note* Musique::getClosestNotePtr()
     Note* noteptr = &this->notes_.front();
 
 
-	int minX = abs((*noteptr).getShape().getPosition().x);
+	int minX = abs((*noteptr).getShape().getPosition().x - this->reticule_.getPosition().x);
 
 	for (Note& note : this->notes_) {
-		int curX = abs(note.getShape().getPosition().x);
+		int curX = abs(note.getShape().getPosition().x - this->reticule_.getPosition().x);
 		if (curX < minX) {
 			minX = curX; 
 			noteptr = &note;
