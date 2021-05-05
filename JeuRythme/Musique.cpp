@@ -1,4 +1,6 @@
 #include "Musique.h"
+#include <iostream>
+using namespace std;
 
 Musique::Musique(sf::RenderWindow &renderWindow)
 {
@@ -41,10 +43,26 @@ void Musique::evenementTouche(sf::Event& event)
 	if (std::find(keys.begin(), keys.end(), event.key.code) != keys.end()) {
 		int distance = abs(currNote->getShape().getPosition().x - this->reticule_.getPosition().x);
 		if (distance < 100 && !currNote->isPlayed()) {
-			// TODO: Affichage indicateur trop tot trop tard
-
+			if (currNote->getShape().getPosition().x < 35)
+			{
+				com_ = "Trop tard!";
+			}
+			else if (currNote->getShape().getPosition().x > 65)
+			{
+				com_ = "Trop tot!";
+			}
+			else if ((currNote->getShape().getPosition().x < 45 && currNote->getShape().getPosition().x > 35) || (currNote->getShape().getPosition().x > 55 && currNote->getShape().getPosition().x < 65))
+			{
+				score_ += 50;
+				com_ = "Super!";
+			}
+			else if (currNote->getShape().getPosition().x <= 55 && currNote->getShape().getPosition().x >= 45)
+			{
+				score_ += 100;
+				com_ = "Parfait!";
+			}
 			currNote->setPlayed(true);
-			this->score_ += 100-distance;
+			cout << currNote->getShape().getPosition().x << endl;
 		} 
 
 	}

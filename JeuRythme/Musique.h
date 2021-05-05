@@ -15,6 +15,7 @@ private:
 	sf::RenderWindow *renderWindow_;
 	sf::CircleShape reticule_;
 	int score_;
+	string com_;
 
 public:
 	Musique(sf::RenderWindow &renderWindow);
@@ -24,6 +25,7 @@ public:
 
 	 Note* getClosestNotePtr();
 	 inline int getScore() const { return this->score_; }
+	 inline string getCom() const { return this->com_; }
 };
 
 #endif
