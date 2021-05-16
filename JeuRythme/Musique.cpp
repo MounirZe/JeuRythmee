@@ -41,22 +41,25 @@ void Musique::evenementTouche(sf::Event& event)
 	list<sf::Keyboard::Key> keys = currNote->getTypeNote().getKeys();
 
 	if (std::find(keys.begin(), keys.end(), event.key.code) != keys.end()) {
-		int distance = abs(currNote->getShape().getPosition().x - this->reticule_.getPosition().x);
+		int distance = abs(currNote->getShape().getPosition().x - this->reticule_.getPosition().x); // TODO : Verifier le retour de getPos().x
 		if (distance < 100 && !currNote->isPlayed()) {
-			if (currNote->getShape().getPosition().x < 35)
-			{
-				com_ = "Trop tard!";
+			if(distance > 15){
+				if (currNote->getShape().getPosition().x < this->reticule_.getPosition().x)
+				{
+					com_ = "Trop tard!";
+				}
+				else
+				{
+					com_ = "Trop tot!";
+				}
 			}
-			else if (currNote->getShape().getPosition().x > 65)
-			{
-				com_ = "Trop tot!";
-			}
-			else if ((currNote->getShape().getPosition().x < 45 && currNote->getShape().getPosition().x > 35) || (currNote->getShape().getPosition().x > 55 && currNote->getShape().getPosition().x < 65))
+
+			if (distance > 5 && distance < 15)
 			{
 				score_ += 50;
 				com_ = "Super!";
 			}
-			else if (currNote->getShape().getPosition().x <= 55 && currNote->getShape().getPosition().x >= 45)
+			else if (distance <= 5)
 			{
 				score_ += 100;
 				com_ = "Parfait!";
