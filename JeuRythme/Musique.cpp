@@ -1,27 +1,48 @@
 #include "Musique.h"
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 Musique::Musique(sf::RenderWindow &renderWindow)
 {
 	this->renderWindow_ = &renderWindow;
 }
-
-void Musique::genererMusique()
+void Musique::genererMusique(string file_)
 {
-	this->reticule_.setPosition(50,250);
+	ifstream myfile;
+	myfile.open(file_);
+	string line;
+
+	string delimiter = ">=";
+	if (myfile.is_open())
+	{
+		while (getline(myfile, line))
+		{
+			int typeNote = stoi(line.substr(0, line.find(delimiter)));
+			line.erase(0, line.find(delimiter) + delimiter.length());
+			int distance = stoi(line);
+			TypeNoteEnum typeNoteEnum;
+			switch (typeNote) {
+			case 1:
+				typeNoteEnum = TypeNoteEnum::Bleue;
+			case 2:
+				typeNoteEnum = TypeNoteEnum::Rouge;
+			default:
+				typeNoteEnum = TypeNoteEnum::Rouge;
+			}
+			Note note(typeNoteEnum, distance);
+			this->notes_.push_back(note);
+		}
+		myfile.close();
+	}
+	this->reticule_.setPosition(50, 250);
 	this->reticule_.setRadius(10);
 	this->reticule_.setFillColor(sf::Color::White);
 	this->reticule_.setOutlineThickness(4);
 	this->reticule_.setOutlineColor(sf::Color::Red);
 
 	this->score_ = 0;
-	for (int i = 0; i < 20; i++) {
-		Note note(TypeNoteEnum::Bleue, i * 100);
-		this->notes_.push_back(note);
-	}
 }
-
 void Musique::updateMusique()
 {
 	this->renderWindow_->draw(this->reticule_);
