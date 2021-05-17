@@ -1,8 +1,5 @@
 #include "Musique.h"
 #include <iostream>
-
-#include <fstream>
-
 using namespace std;
 
 Musique::Musique(sf::RenderWindow &renderWindow)
@@ -10,34 +7,8 @@ Musique::Musique(sf::RenderWindow &renderWindow)
 	this->renderWindow_ = &renderWindow;
 }
 
-void Musique::genererMusique(string file_)
+void Musique::genererMusique()
 {
-	ifstream myfile;
-	myfile.open(file_);
-	string line;
-
-	string delimiter = ">=";
-	if (myfile.is_open())
-	{
-		while (getline(myfile, line))
-		{
-			int typeNote = stoi(line.substr(0, line.find(delimiter)));
-			line.erase(0, line.find(delimiter) + delimiter.length());
-			int distance = stoi(line);
-			TypeNoteEnum typeNoteEnum;
-			switch (typeNote) {
-				case 1:
-					typeNoteEnum = TypeNoteEnum::Bleue;
-				case 2:
-					typeNoteEnum = TypeNoteEnum::Rouge;
-				default:
-					typeNoteEnum = TypeNoteEnum::Rouge;
-			}
-			Note note(typeNoteEnum, distance);
-			this->notes_.push_back(note);
-		}
-		myfile.close();
-	}
 	this->reticule_.setPosition(50,250);
 	this->reticule_.setRadius(10);
 	this->reticule_.setFillColor(sf::Color::White);
@@ -45,6 +16,10 @@ void Musique::genererMusique(string file_)
 	this->reticule_.setOutlineColor(sf::Color::Red);
 
 	this->score_ = 0;
+	for (int i = 0; i < 20; i++) {
+		Note note(TypeNoteEnum::Bleue, i * 100);
+		this->notes_.push_back(note);
+	}
 }
 
 void Musique::updateMusique()
@@ -66,22 +41,25 @@ void Musique::evenementTouche(sf::Event& event)
 	list<sf::Keyboard::Key> keys = currNote->getTypeNote().getKeys();
 
 	if (std::find(keys.begin(), keys.end(), event.key.code) != keys.end()) {
-		int distance = abs(currNote->getShape().getPosition().x - this->reticule_.getPosition().x);
+		int distance = abs(currNote->getShape().getPosition().x - this->reticule_.getPosition().x); // TODO : Verifier le retour de getPos().x
 		if (distance < 100 && !currNote->isPlayed()) {
-			if (currNote->getShape().getPosition().x < 35)
-			{
-				com_ = "Trop tard!";
+			if(distance > 15){
+				if (currNote->getShape().getPosition().x < this->reticule_.getPosition().x)
+				{
+					com_ = "Trop tard!";
+				}
+				else
+				{
+					com_ = "Trop tot!";
+				}
 			}
-			else if (currNote->getShape().getPosition().x > 65)
-			{
-				com_ = "Trop tot!";
-			}
-			else if ((currNote->getShape().getPosition().x < 45 && currNote->getShape().getPosition().x > 35) || (currNote->getShape().getPosition().x > 55 && currNote->getShape().getPosition().x < 65))
+
+			if (distance > 5 && distance < 15)
 			{
 				score_ += 50;
 				com_ = "Super!";
 			}
-			else if (currNote->getShape().getPosition().x <= 55 && currNote->getShape().getPosition().x >= 45)
+			else if (distance <= 5)
 			{
 				score_ += 100;
 				com_ = "Parfait!";

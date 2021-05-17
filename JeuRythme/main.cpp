@@ -59,7 +59,7 @@ int main()
 	musique.play();
     sf::Text score;
 	sf::Text com; // Variable de texte pour affichage IU
-	com.setCharacterSize(40); // Définition des différents paramètres de com
+	com.setCharacterSize(40); // DÃ©finition des diffÃ©rents paramÃ¨tres de com
 	com.setFillColor(sf::Color::White);
 	com.setFont(font);
 	com.setOutlineColor(sf::Color::Red);
@@ -76,25 +76,25 @@ int main()
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
-            
-            if (event.type == sf::Event::KeyPressed) {
-                mamusique.evenementTouche(event);
-            }
-			if ((event.type == sf::Event::KeyReleased) && ( event.key.code == sf::Keyboard::P)) {
-				cout << "pause" << endl;
-				gamePause = true;
-			}
-			if (gamePause && (event.type == sf::Event::KeyReleased) && (event.key.code == sf::Keyboard::R))
-			{
-				musique.play();
-				gamePause = false;
-			}
-			if (gamePause && (event.type == sf::Event::KeyReleased) && (event.key.code == sf::Keyboard::Space))
-			{
-				window.close();
-			}
+		if (event.type == sf::Event::Closed)
+		window.close();
+
+		if (event.type == sf::Event::KeyPressed) {
+			mamusique.evenementTouche(event);
+		}
+		if ((event.type == sf::Event::KeyReleased) && ( event.key.code == sf::Keyboard::Escape)) {
+			cout << "pause" << endl;
+			gamePause = true;
+		}
+		if (gamePause && (event.type == sf::Event::KeyReleased) && (event.key.code == sf::Keyboard::R))
+		{
+			musique.play();
+			gamePause = false;
+		}
+		if (gamePause && (event.type == sf::Event::KeyReleased) && (event.key.code == sf::Keyboard::Space))
+		{
+			window.close();
+		}
         }
 
         window.clear();
