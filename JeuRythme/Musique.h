@@ -19,7 +19,7 @@ private:
 
 public:
 	Musique(sf::RenderWindow &renderWindow);
-	 void genererMusique();
+	 void genererMusique(string file_);
 	 void updateMusique();
 	 void evenementTouche(sf::Event& event);
 

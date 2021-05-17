@@ -93,8 +93,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>C:\SFML-2.5.1\lib\sfml-graphics-d.lib;C:\SFML-2.5.1\lib\sfml-window-d.lib;C:\SFML-2.5.1\lib\sfml-system-d.lib;C:\SFML-2.5.1\lib\openal32.lib;C:\SFML-2.5.1\lib\freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\OpenAL 1.1 SDK\libs;C:\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\SFML-2.5.1\lib\sfml-graphics-d.lib;C:\SFML-2.5.1\lib\sfml-window-d.lib;C:\SFML-2.5.1\lib\sfml-system-d.lib;C:\SFML-2.5.1\lib\sfml-audio-d.lib;C:\SFML-2.5.1\lib\openal32.lib;C:\SFML-2.5.1\lib\freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

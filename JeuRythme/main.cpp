@@ -1,24 +1,20 @@
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio/Music.hpp>
-#include <SFML/Audio/AlResource.hpp>
-#include <SFML/Audio/SoundStream.hpp>
-#include <SFML/Audio/SoundSource.hpp>
+#include <SFML/Audio.hpp>
+#include <iostream>
 #include "Note.h"
 #include "Musique.h"
-#include <iostream>
 using namespace std;
 
 int main()
 {
 	bool gamePause = false;
     sf::RenderWindow window(sf::VideoMode(500, 500), "Osu! Wish");
-
+	
     sf::Font font;
     if (!font.loadFromFile("arial.ttf"))
     {
         // error...
     }
-    
     sf::Vertex line[] =
     {
         sf::Vertex(sf::Vector2f(150, 0)),
@@ -72,6 +68,7 @@ int main()
     score.setCharacterSize(20);
     score.setFillColor(sf::Color::Red);
     score.setFont(font); // font is a sf::Font
+
 
     mamusique.genererMusique();
     while (window.isOpen())
