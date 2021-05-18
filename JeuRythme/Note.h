@@ -3,13 +3,13 @@
 #include "TypeNote.h"
 #include <SFML/Graphics.hpp>
 
-class Note
+class Note // Zemmiri/Faure
 {
 
 private:
-	TypeNote typeNote_;
-	sf::CircleShape shape_;
-	bool played_;
+	TypeNote typeNote_; // note rouge ou bleu 
+	sf::CircleShape shape_; // forme des notes 
+	bool played_; // variable binaire qui indique si la note a deja été jouée ou non 
 public:
 	Note(TypeNoteEnum typeNote, float x = 0, float y =250);
 	void UpdatePosition();
@@ -20,6 +20,7 @@ public:
 
 	inline bool isPlayed() const { return played_; }
 	inline void setPlayed(bool state) { played_ = state; }
+	inline void setColor(sf::Color color) { this->shape_.setFillColor(color); }
 
 };
 #endif 

@@ -13,7 +13,7 @@ int main()
 	int difficulty = 1;
 	bool gamePause = false;
 	bool gameMenu = true;
-    sf::RenderWindow window(sf::VideoMode(500, 500), "Osu! Wish");
+    sf::RenderWindow window(sf::VideoMode(500, 500), "Osu! Wish", sf::Style::Close);
 
     sf::Font font;
     if (!font.loadFromFile("arial.ttf"))
@@ -149,8 +149,7 @@ int main()
             if (event.type == sf::Event::KeyPressed) {
                 mamusique.evenementTouche(event);
             }
-			if ((event.type == sf::Event::KeyReleased) && ( event.key.code == sf::Keyboard::Escape)) {
-				cout << "pause" << endl;
+			if (!gameMenu && (event.type == sf::Event::KeyReleased) && ( event.key.code == sf::Keyboard::Escape)) {
 				gamePause = true;
 			}
 			if (gamePause && (event.type == sf::Event::KeyReleased) && (event.key.code == sf::Keyboard::R))
