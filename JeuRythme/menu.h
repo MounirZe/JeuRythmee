@@ -10,7 +10,7 @@ public:
 	sf::Text text[5];
 	sf::RectangleShape rectangle[4];
 public:
-	Menu(float width = 500, float height = 500);
+	Menu();
 	~Menu();
 	void draw(sf::RenderWindow &window);
 };
