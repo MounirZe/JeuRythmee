@@ -1,6 +1,6 @@
 #include "menu.h"
 
-Menu::Menu(float width, float height)
+Menu::Menu()
 {
 	if (!font.loadFromFile("arial.ttf"))
 	{
