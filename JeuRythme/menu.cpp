@@ -6,45 +6,37 @@ Menu::Menu(float width, float height)
 	{
 		// handle error
 	}
-	text[0].setFont(font);
-	text[0].setFillColor(sf::Color::White);
+	for(int i = 0; i < 4; i++){
+		text[i].setFont(font);
+		text[i].setFillColor(sf::Color::White);
+		
+		text[i].setOutlineThickness(4);
+	}
+
 	text[0].setString("GAME MENU");
 	text[0].setPosition(100, 100);
 	text[0].setCharacterSize(40);
 	text[0].setOutlineColor(sf::Color::Red);
-	text[0].setOutlineThickness(4);
 
-	text[1].setFont(font);
-	text[1].setFillColor(sf::Color::White);
 	text[1].setString("PLAY");
 	text[1].setPosition(0, 200);
 	text[1].setCharacterSize(20);
 	text[1].setOutlineColor(sf::Color::Blue);
-	text[1].setOutlineThickness(4);
 
-	text[2].setFont(font);
-	text[2].setFillColor(sf::Color::White);
 	text[2].setString("EASY");
 	text[2].setPosition(0, 300);
 	text[2].setCharacterSize(20);
 	text[2].setOutlineColor(sf::Color::Green);
-	text[2].setOutlineThickness(4);
 
-	text[3].setFont(font);
-	text[3].setFillColor(sf::Color::White);
 	text[3].setString("MEDIUM");
 	text[3].setPosition(85, 300);
 	text[3].setCharacterSize(20);
 	text[3].setOutlineColor(sf::Color::Color(255, 124, 0));
-	text[3].setOutlineThickness(4);
-
-	text[4].setFont(font);
-	text[4].setFillColor(sf::Color::White);
+	
 	text[4].setString("HARD");
 	text[4].setPosition(200, 300);
 	text[4].setCharacterSize(20);
 	text[4].setOutlineColor(sf::Color::Red);
-	text[4].setOutlineThickness(4);
 
 	rectangle[0].setSize(sf::Vector2f(70, 50));
 	rectangle[0].setPosition(0, 190);
