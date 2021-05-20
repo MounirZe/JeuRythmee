@@ -48,7 +48,7 @@ void Musique::genererMusique(string filePath)
 
 void Musique::genererMusique()
 {
-	this->reticule_.setPosition(50,250);
+	this->reticule_.setPosition(50, 250);
 	this->reticule_.setRadius(10);
 	this->reticule_.setFillColor(sf::Color::White);
 	this->reticule_.setOutlineThickness(4);
@@ -67,7 +67,7 @@ void Musique::updateMusique()
 
 	for (Note &note : this->notes_) {
 		note.UpdatePosition(this->difficulty_*0.1f);
-		if(note.getPosition().x > 0)this->renderWindow_->draw(note);
+		if (note.getPosition().x > 0)this->renderWindow_->draw(note);
 		//TODO: Suppression objet
 	}
 
@@ -96,18 +96,18 @@ void Musique::evenementTouche(sf::Event& event)
 
 			if (distance > 5 && distance < 15)
 			{
-				score_ += 50*this->difficulty_;
+				score_ += 50 * this->difficulty_;
 				retourTiming_ = "Super!";
 				currNote->setFillColor(sf::Color::Green);
 			}
 			else if (distance <= 5)
 			{
-				score_ += 100* this->difficulty_;
+				score_ += 100 * this->difficulty_;
 				retourTiming_ = "Parfait!";
 				currNote->setFillColor(sf::Color::Green);
 			}
 			currNote->setPlayed(true);
-		} 
+		}
 
 	}
 }
@@ -119,9 +119,9 @@ void Musique::setDifficulty(int difficulty)
 
 Note* Musique::getClosestNotePtr()
 {
-	if(this->notes_.empty()) return nullptr;
+	if (this->notes_.empty()) return nullptr;
 
-    Note* noteptr = &this->notes_.front();
+	Note* noteptr = &this->notes_.front();
 
 
 	int minX = abs((*noteptr).getPosition().x - this->reticule_.getPosition().x);
@@ -129,11 +129,9 @@ Note* Musique::getClosestNotePtr()
 	for (Note& note : this->notes_) {
 		int curX = abs(note.getPosition().x - this->reticule_.getPosition().x);
 		if (curX < minX) {
-			minX = curX; 
+			minX = curX;
 			noteptr = &note;
 		}
 	}
 	return noteptr;
 }
-
-

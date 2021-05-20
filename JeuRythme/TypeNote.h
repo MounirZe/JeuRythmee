@@ -10,7 +10,7 @@ enum TypeNoteEnum {
 	Rouge, Bleue
 };
 
-class TypeNote
+class TypeNote // Zemmiri
 {
 private:
 	sf::Color couleur_;

@@ -7,7 +7,7 @@
 #include <string>
 
 using namespace std;
-class Musique
+class Musique // Zemmiri/Faure
 {
 private:
 	list<Note> notes_;  // Liste des notes qui compose la musique à jouer
@@ -20,15 +20,15 @@ private:
 
 public:
 	Musique(sf::RenderWindow &renderWindow);
-	 void genererMusique();
-	 void updateMusique();
-	 void evenementTouche(sf::Event& event);
-	 void genererMusique(string filePath);
+	void genererMusique();
+	void updateMusique();
+	void evenementTouche(sf::Event& event);
+	void genererMusique(string filePath);
 
-	 void setDifficulty(int difficulty);
-	 Note* getClosestNotePtr();
-	 inline int getScore() const { return this->score_; }
-	 inline string getRetourTiming() const { return this->retourTiming_; }
+	void setDifficulty(int difficulty);
+	Note* getClosestNotePtr();
+	inline int getScore() const { return this->score_; }
+	inline string getRetourTiming() const { return this->retourTiming_; }
 };
 
 #endif

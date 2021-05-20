@@ -1,6 +1,6 @@
 #include "Note.h"
 
-Note::Note(TypeNoteEnum typeNote, float x , float y )
+Note::Note(TypeNoteEnum typeNote, float x, float y)
 {
 	this->typeNote_ = TypeNote(typeNote);
 	this->setPosition(x, y);
