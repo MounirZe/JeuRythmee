@@ -3,9 +3,8 @@
 #include <fstream>
 using namespace std;
 
-Musique::Musique(sf::RenderWindow &renderWindow)
+Musique::Musique(sf::RenderWindow& renderWindow) : renderWindow_(&renderWindow), difficulty_(1), score_(0)
 {
-	this->renderWindow_ = &renderWindow;
 }
 void Musique::genererMusique(string filePath)
 {
