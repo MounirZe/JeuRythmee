@@ -17,7 +17,7 @@ int main()
 	bool gameMenu = true;
 	sf::RenderWindow window(sf::VideoMode(500, 500), "Osu! Wish", sf::Style::Close);
 
-	Menu menu(window.getSize().x, window.getSize().y);
+	Menu menu();
 	sf::Font font;
 	if (!font.loadFromFile("arial.ttf"))
 	{
@@ -34,7 +34,7 @@ int main()
 	Musique mamusique(window);
 
 
-	// Utilisation d'un fichier de config pour charger la musique souhaitée, le fichier de config contient une ligne qui est le chemin de la musique
+	// Utilisation d'un fichier de config pour charger la musique souhaitÃ©e, le fichier de config contient une ligne qui est le chemin de la musique
 	string configFileName = "config.txt";
 	ifstream configFile;
 	configFile.open(configFileName);
@@ -46,11 +46,11 @@ int main()
 		getline(configFile, notePath);
 	}
 	if (notePath != "") {
-		mamusique.genererMusique(notePath);//Chargement de la musique indiquée dans le fichier de config
+		mamusique.genererMusique(notePath);//Chargement de la musique indiquÃ©e dans le fichier de config
 
 	}
 	else {
-		mamusique.genererMusique(); //Musique par défaut 
+		mamusique.genererMusique(); //Musique par dÃ©faut 
 	}
 	sf::CircleShape shape_(100);
 	shape_.setFillColor(sf::Color::Green);
@@ -88,7 +88,7 @@ int main()
 
 	sf::Text score;
 	sf::Text retourTiming; // Variable de texte pour affichage IU
-	retourTiming.setCharacterSize(40); // Définition des différents paramètres de retourTiming
+	retourTiming.setCharacterSize(40); // DÃ©finition des diffÃ©rents paramÃ¨tres de retourTiming
 	retourTiming.setFillColor(sf::Color::White);
 	retourTiming.setFont(font);
 	retourTiming.setOutlineColor(sf::Color::Red);
