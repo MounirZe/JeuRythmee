@@ -6,6 +6,7 @@
 #include "Note.h"
 #include "Musique.h"
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 int main()
@@ -21,17 +22,37 @@ int main()
         // error...
     }
     
+
     sf::Vertex line[] =
     {
         sf::Vertex(sf::Vector2f(150, 0)),
         sf::Vertex(sf::Vector2f(150, 500))
     };
 
+	Musique mamusique(window);
 
+	
+	// Utilisation d'un fichier de config pour charger la musique souhaitée, le fichier de config contient une ligne qui est le chemin de la musique
+	string configFileName = "config.txt";
+	ifstream configFile;
+	configFile.open(configFileName);
+	string notePath = "";
+
+
+	if (configFile.is_open())
+	{
+		getline(configFile, notePath);
+	}
+	if (notePath != "") {
+		mamusique.genererMusique(notePath);//Chargement de la musique indiquée dans le fichier de config
+
+	}
+	else {
+		mamusique.genererMusique(); //Musique par défaut 
+	}
     sf::CircleShape shape_(100);
     shape_.setFillColor(sf::Color::Green);
     shape_.setPosition(50, 50);
-    Musique mamusique(window);
 
 	sf::RectangleShape rectangle(sf::Vector2f(70, 50));
 	rectangle.setFillColor(sf::Color::Black);
@@ -137,7 +158,6 @@ int main()
     score.setFillColor(sf::Color::Red);
     score.setFont(font); // font is a sf::Font
 
-    mamusique.genererMusique();
     while (window.isOpen())
     {
         sf::Event event;
@@ -172,16 +192,19 @@ int main()
 				{
 					//action quand clique sur difficulte easy 
 					difficulty = 1;
+					mamusique.setDifficulty(difficulty);
 				}
 				if (rectangle2.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
 				{
 					//action quand clique sur difficulte medium
 					difficulty = 2;
+					mamusique.setDifficulty(difficulty);
 				}
 				if (rectangle3.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
 				{
 					//action quand clique sur difficulte hard
 					difficulty = 3;
+					mamusique.setDifficulty(difficulty);
 				}
 			}
         }

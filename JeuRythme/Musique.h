@@ -15,6 +15,7 @@ private:
 	sf::RenderWindow *renderWindow_;
 	sf::CircleShape reticule_;
 	int score_; // variable de score 
+	int difficulty_;
 	string retourTiming_; // variable de texte pour l'affichage du timing pour utilisateur 
 
 public:
@@ -22,7 +23,9 @@ public:
 	 void genererMusique();
 	 void updateMusique();
 	 void evenementTouche(sf::Event& event);
+	 void genererMusique(string filePath);
 
+	 void setDifficulty(int difficulty);
 	 Note* getClosestNotePtr();
 	 inline int getScore() const { return this->score_; }
 	 inline string getRetourTiming() const { return this->retourTiming_; }

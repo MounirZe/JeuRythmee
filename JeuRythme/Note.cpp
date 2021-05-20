@@ -3,13 +3,13 @@
 Note::Note(TypeNoteEnum typeNote, float x , float y )
 {
 	this->typeNote_ = TypeNote(typeNote);
-	this->shape_.setPosition(x, y);
-	this->shape_.setRadius(10);
-	this->shape_.setFillColor(this->typeNote_.getCouleur());
+	this->setPosition(x, y);
+	this->setRadius(10);
+	this->setFillColor(this->typeNote_.getCouleur());
 }
 
-void Note::UpdatePosition()
+void Note::UpdatePosition(float speed)
 {
-	sf::Vector2f movement(-0.1f, 0);
-	this->shape_.move(movement);
+	sf::Vector2f movement(-speed, 0);
+	this->move(movement);
 }
