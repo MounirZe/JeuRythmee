@@ -14,12 +14,15 @@ private:
 	string nom_; // nom de la musique pour affichage 
 	sf::RenderWindow *renderWindow_;
 	sf::CircleShape reticule_;
+
+	sf::Text scoreText_; 
+	sf::Text retourTiming_; // Variable de texte pour affichage IU
+
 	int score_; // variable de score 
 	int difficulty_;
-	string retourTiming_; // variable de texte pour l'affichage du timing pour utilisateur 
 
 public:
-	Musique(sf::RenderWindow &renderWindow);
+	Musique(sf::RenderWindow &renderWindow,sf::Font &font);
 	void genererMusique();
 	void updateMusique();
 	void evenementTouche(sf::Event& event);
@@ -27,8 +30,6 @@ public:
 
 	void setDifficulty(int difficulty);
 	Note* getClosestNotePtr();
-	inline int getScore() const { return this->score_; }
-	inline string getRetourTiming() const { return this->retourTiming_; }
 };
 
 #endif

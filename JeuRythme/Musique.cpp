@@ -3,8 +3,23 @@
 #include <fstream>
 using namespace std;
 
-Musique::Musique(sf::RenderWindow& renderWindow) : renderWindow_(&renderWindow), difficulty_(1), score_(0)
+Musique::Musique(sf::RenderWindow& renderWindow,sf::Font &font) : renderWindow_(&renderWindow), difficulty_(1), score_(0)
 {
+
+	this->retourTiming_.setCharacterSize(40); // Définition des différents paramètres de retourTiming
+	this->retourTiming_.setFillColor(sf::Color::White);
+	this->retourTiming_.setFont(font);
+	this->retourTiming_.setOutlineColor(sf::Color::Red);
+	this->retourTiming_.setOutlineThickness(4);
+	this->retourTiming_.setPosition(300, 100);
+	this->retourTiming_.setString("");
+
+	this->scoreText_.setString(std::to_string(score_));
+	this->scoreText_.setCharacterSize(20);
+	this->scoreText_.setFillColor(sf::Color::Red);
+	this->scoreText_.setFont(font);
+
+
 }
 void Musique::genererMusique(string filePath)
 {
@@ -64,6 +79,9 @@ void Musique::genererMusique()
 void Musique::updateMusique()
 {
 	this->renderWindow_->draw(this->reticule_);
+	this->renderWindow_->draw(this->retourTiming_);
+	this->renderWindow_->draw(this->scoreText_);
+
 
 	for (Note &note : this->notes_) {
 		note.UpdatePosition(this->difficulty_*0.1f);
@@ -82,14 +100,15 @@ void Musique::evenementTouche(sf::Event& event)
 	if (std::find(keys.begin(), keys.end(), event.key.code) != keys.end()) {
 		int distance = abs(currNote->getPosition().x - this->reticule_.getPosition().x);
 		if (distance < 100 && !currNote->isPlayed()) {
+			string retourTimingStr;
 			if (distance > 15) {
 				if (currNote->getPosition().x < this->reticule_.getPosition().x)
 				{
-					retourTiming_ = "Trop tard!";
+					retourTimingStr = "Trop tard!";
 				}
 				else
 				{
-					retourTiming_ = "Trop tot!";
+					retourTiming_.setString( "Trop tot!");
 					currNote->setFillColor(sf::Color::Transparent);
 				}
 			}
@@ -97,16 +116,18 @@ void Musique::evenementTouche(sf::Event& event)
 			if (distance > 5 && distance < 15)
 			{
 				score_ += 50 * this->difficulty_;
-				retourTiming_ = "Super!";
+				retourTimingStr = "Super!";
 				currNote->setFillColor(sf::Color::Green);
 			}
 			else if (distance <= 5)
 			{
 				score_ += 100 * this->difficulty_;
-				retourTiming_ = "Parfait!";
+				retourTimingStr = "Parfait!";
 				currNote->setFillColor(sf::Color::Green);
 			}
+			retourTiming_.setString(retourTimingStr);
 			currNote->setPlayed(true);
+			scoreText_.setString(std::to_string(score_));
 		}
 
 	}

@@ -17,7 +17,6 @@ int main()
 	bool gameMenu = true;
 	sf::RenderWindow window(sf::VideoMode(500, 500), "Osu! Wish", sf::Style::Close);
 
-	Menu menu();
 	sf::Font font;
 	if (!font.loadFromFile("arial.ttf"))
 	{
@@ -30,8 +29,9 @@ int main()
 		sf::Vertex(sf::Vector2f(150, 0)),
 		sf::Vertex(sf::Vector2f(150, 500))
 	};
+	Menu menu(window,font);
 
-	Musique mamusique(window);
+	Musique mamusique(window,font);
 
 
 	// Utilisation d'un fichier de config pour charger la musique souhaitée, le fichier de config contient une ligne qui est le chemin de la musique
@@ -52,9 +52,9 @@ int main()
 	else {
 		mamusique.genererMusique(); //Musique par défaut 
 	}
-	sf::CircleShape shape_(100);
-	shape_.setFillColor(sf::Color::Green);
-	shape_.setPosition(50, 50);
+	//sf::CircleShape shape_(100);
+	//shape_.setFillColor(sf::Color::Green);
+	//shape_.setPosition(50, 50);
 
 	sf::Text pause;
 	pause.setCharacterSize(40);
@@ -86,17 +86,7 @@ int main()
 	sf::Music musique;
 	musique.openFromFile("musique.wav");
 
-	sf::Text score;
-	sf::Text retourTiming; // Variable de texte pour affichage IU
-	retourTiming.setCharacterSize(40); // Définition des différents paramètres de retourTiming
-	retourTiming.setFillColor(sf::Color::White);
-	retourTiming.setFont(font);
-	retourTiming.setOutlineColor(sf::Color::Red);
-	retourTiming.setOutlineThickness(4);
-	retourTiming.setPosition(300, 100);
-	score.setCharacterSize(20);
-	score.setFillColor(sf::Color::Red);
-	score.setFont(font); // font is a sf::Font
+
 
 	while (window.isOpen())
 	{
@@ -123,18 +113,18 @@ int main()
 			}
 			if (gameMenu && (event.type == sf::Event::MouseButtonReleased))
 			{
-				if (menu.rectangle[1].getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+				if (menu.rectangle[0].getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
 				{
 					gameMenu = false;
 					musique.play();
 				}
-				if (menu.rectangle[2].getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+				if (menu.rectangle[1].getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
 				{
 					//action quand clique sur difficulte easy 
 					difficulty = 1;
 					mamusique.setDifficulty(difficulty);
 				}
-				if (menu.rectangle[3].getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+				if (menu.rectangle[2].getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
 				{
 					//action quand clique sur difficulte medium
 					difficulty = 2;
@@ -152,7 +142,6 @@ int main()
 		if (!gamePause && !gameMenu)
 		{
 			mamusique.updateMusique();
-			window.draw(retourTiming);
 			window.draw(line, 2, sf::Lines);
 		}
 		else if (gamePause && !gameMenu)
@@ -164,11 +153,8 @@ int main()
 		}
 		else if (gameMenu)
 		{
-			menu.draw(window);
+			menu.draw();
 		}
-		score.setString(std::to_string(mamusique.getScore()));
-		retourTiming.setString(mamusique.getRetourTiming());
-		window.draw(score);
 		window.display();
 
 	}

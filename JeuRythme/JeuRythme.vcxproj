@@ -148,11 +148,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="Musique.cpp" />
     <ClCompile Include="Note.cpp" />
     <ClCompile Include="TypeNote.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="menu.h" />
     <ClInclude Include="Musique.h" />
     <ClInclude Include="Note.h" />
     <ClInclude Include="TypeNote.h" />

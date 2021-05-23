@@ -1,16 +1,12 @@
 #include "menu.h"
 
-Menu::Menu()
+Menu::Menu(sf::RenderWindow& window, sf::Font &font) : renderWindow_(&window)
 {
-	if (!font.loadFromFile("arial.ttf"))
+	for (sf::Text& text : this->text)
 	{
-		// handle error
-	}
-	for(int i = 0; i < 4; i++){
-		text[i].setFont(font);
-		text[i].setFillColor(sf::Color::White);
-		
-		text[i].setOutlineThickness(4);
+		text.setFont(font);
+		text.setFillColor(sf::Color::White);
+		text.setOutlineThickness(4);
 	}
 
 	text[0].setString("GAME MENU");
@@ -41,8 +37,10 @@ Menu::Menu()
 	rectangle[0].setSize(sf::Vector2f(70, 50));
 	rectangle[0].setPosition(0, 190);
 
+	rectangle[1].setFillColor(sf::Color::Green);
+
 	rectangle[1].setSize(sf::Vector2f(70, 50));
-	rectangle[1].setPosition(0, 190);
+	rectangle[1].setPosition(0, 290);
 
 	rectangle[2].setSize(sf::Vector2f(90, 50));
 	rectangle[2].setPosition(80, 290);
@@ -52,14 +50,10 @@ Menu::Menu()
 
 }
 
-Menu::~Menu()
+void Menu::draw()
 {
-}
-
-void Menu::draw(sf::RenderWindow & window)
-{
-	for (int i = 0; i < 5; i++)
+	for (sf::Text &text : this->text)
 	{
-		window.draw(text[i]);
+		this->renderWindow_->draw(text);
 	}
 }
