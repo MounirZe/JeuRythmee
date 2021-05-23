@@ -12,23 +12,27 @@ using namespace std;
 
 int main()
 {
-	int difficulty = 1;
+	// Initialisation des variables de gestion du jeu
 	bool gamePause = false;
 	bool gameMenu = true;
+
+	// Initialisation de la fenetre de jeu de taille 500 500
 	sf::RenderWindow window(sf::VideoMode(500, 500), "Osu! Wish", sf::Style::Close);
 
+	// Initialisation et chargement de la police
 	sf::Font font;
 	if (!font.loadFromFile("arial.ttf"))
 	{
 		// error...
 	}
 
-
+	// Declaration d'une ligne pour que le joueur puisse se situer
 	sf::Vertex line[] =
 	{
 		sf::Vertex(sf::Vector2f(150, 0)),
 		sf::Vertex(sf::Vector2f(150, 500))
 	};
+	// Initilisation du menu et de la classe musique
 	Menu menu(window,font);
 
 	Musique mamusique(window,font);
@@ -52,10 +56,8 @@ int main()
 	else {
 		mamusique.genererMusique(); //Musique par défaut 
 	}
-	//sf::CircleShape shape_(100);
-	//shape_.setFillColor(sf::Color::Green);
-	//shape_.setPosition(50, 50);
 
+	// Declaration et initalisation des textes de l'ecran de pause
 	sf::Text pause;
 	pause.setCharacterSize(40);
 	pause.setFillColor(sf::Color::White);
@@ -83,14 +85,16 @@ int main()
 	exit.setString("PRESS SPACE TO EXIT THE GAME");
 	exit.setFont(font);
 
+	// Declaration et chargement de la musique (audio)
 	sf::Music musique;
 	musique.openFromFile("musique.wav");
 
 
 
-	while (window.isOpen())
+	while (window.isOpen()) // Boucle tant que la fenetre n'est pas fermée
 	{
 		sf::Event event;
+		// Gestion des differents evenements
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
@@ -121,41 +125,40 @@ int main()
 				if (menu.rectangle[1].getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
 				{
 					//action quand clique sur difficulte easy 
-					difficulty = 1;
-					mamusique.setDifficulty(difficulty);
+					mamusique.setDifficulty(1);
 				}
 				if (menu.rectangle[2].getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
 				{
 					//action quand clique sur difficulte medium
-					difficulty = 2;
-					mamusique.setDifficulty(difficulty);
+					mamusique.setDifficulty(2);
 				}
 				if (menu.rectangle[3].getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
 				{
 					//action quand clique sur difficulte hard
-					difficulty = 3;
-					mamusique.setDifficulty(difficulty);
+					mamusique.setDifficulty(3);
 				}
 			}
 		}
-		window.clear();
-		if (!gamePause && !gameMenu)
+		window.clear(); // Clear de la fenetre pour dessiner les nouveaux objets sur la fenetre
+
+		if (!gamePause && !gameMenu) // Si le jeu est lancé
 		{
-			mamusique.updateMusique();
-			window.draw(line, 2, sf::Lines);
+			mamusique.updateMusique(); // Mise à jour des differentes notes et indicateurs graphique comme le score
+			window.draw(line, 2, sf::Lines); // Dessine la ligne pour se situer 
 		}
-		else if (gamePause && !gameMenu)
+		else if (gamePause && !gameMenu) // Si le jeu est en pause
 		{
+			// Dessine les differents text et met la musique en pause
 			window.draw(pause);
 			window.draw(resume);
 			window.draw(exit);
 			musique.pause();
 		}
-		else if (gameMenu)
+		else if (gameMenu) // Si le joueur est sur le menu
 		{
-			menu.draw();
+			menu.draw(); // Dessine le menu
 		}
-		window.display();
+		window.display(); // Affiche la fenetre mise à jour 
 
 	}
 

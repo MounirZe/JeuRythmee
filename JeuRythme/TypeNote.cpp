@@ -1,13 +1,13 @@
 #include "TypeNote.h"
 
 
-TypeNote::TypeNote(TypeNoteEnum enumerateur)
+TypeNote::TypeNote(TypeNoteEnum enumerateur) 
 {
-	switch (enumerateur) {
+	switch (enumerateur) { // En fonction de l'enumerateur utilisé dans le constructeur
 		case TypeNoteEnum::Rouge:
-			this->toucheClavier_.push_back(sf::Keyboard::X);
+			this->toucheClavier_.push_back(sf::Keyboard::X); // Ajout des touches pour jouer la note
 			this->toucheClavier_.push_back(sf::Keyboard::C);
-			this->couleur_ = sf::Color::Red;
+			this->couleur_ = sf::Color::Red; // Couleur de la note
 			break;
 		case TypeNoteEnum::Bleue:
 			this->toucheClavier_.push_back(sf::Keyboard::W);
