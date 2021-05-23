@@ -44,6 +44,10 @@ void Musique::genererMusique(string filePath)
 			case 2:
 				typeNoteEnum = TypeNoteEnum::Rouge;
 				break;
+			case 3:
+
+				typeNoteEnum = TypeNoteEnum::Orange;
+				break;
 			default:
 				typeNoteEnum = TypeNoteEnum::Rouge;
 			}
