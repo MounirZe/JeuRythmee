@@ -1,7 +1,7 @@
 #include "menu.h"
 
 Menu::Menu(sf::RenderWindow& window, sf::Font &font) : renderWindow_(&window)
-{
+{ // Choix des paramètres pour les différents objets du menu
 	for (sf::Text& text : this->text)
 	{
 		text.setFont(font);
@@ -51,7 +51,7 @@ Menu::Menu(sf::RenderWindow& window, sf::Font &font) : renderWindow_(&window)
 }
 
 void Menu::draw()
-{
+{ // fonction d'affichage
 	for (sf::Text &text : this->text)
 	{
 		this->renderWindow_->draw(text);
